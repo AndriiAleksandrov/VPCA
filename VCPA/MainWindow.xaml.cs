@@ -89,7 +89,7 @@ namespace VCPA
                 case "hello":
                     synth.SpeakAsync("Hello, sir");
                     break;
-                case "time":
+                case "whattime":
                     DateTime now = DateTime.Now;
                     string time = now.GetDateTimeFormats('t')[0];
                     synth.SpeakAsync(time);
@@ -122,6 +122,30 @@ namespace VCPA
                                 process.Kill();
                         }
                     }
+                    break;
+                case "whatdate":
+                    string date;
+                    date = "the date is, " + DateTime.Now.ToString("dd MMM", new System.Globalization.CultureInfo("pl-PL"));
+                    synth.SpeakAsync(date);
+                    date = "" + DateTime.Today.ToString("yyyy");
+                    synth.SpeakAsync(date);
+                    break;
+                case "whatday":
+                    string day;
+                    day = "today is" + DateTime.Now.ToString("dddd", new System.Globalization.CultureInfo("pl-PL"));
+                    synth.SpeakAsync(day);
+                    break;
+                case "stop":
+                    if (synth.State == SynthesizerState.Speaking)
+                        synth.SpeakAsyncCancelAll();
+                    break;
+                case "pause":
+                    if (synth.State == SynthesizerState.Speaking)
+                        synth.Pause();
+                    break;
+                case "resume":
+                    if (synth.State == SynthesizerState.Paused)
+                        synth.Resume();
                     break;
             }
         }
