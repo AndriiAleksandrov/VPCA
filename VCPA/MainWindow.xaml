@@ -5,13 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VCPA"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid Margin="0,0,-78,-31">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="76*"/>
-            <ColumnDefinition Width="43*"/>
-        </Grid.ColumnDefinitions>
-        <ProgressBar x:Name="progressBar" Height="13.944" VerticalAlignment="Bottom" Margin="0,0,80.316,61.13" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+        Title="MainWindow" Height="193.617" Width="444.326">
+    <Grid Margin="10,0,2,-1">
+        <ProgressBar x:Name="progressBar" Height="32" VerticalAlignment="Bottom" Margin="-14,0,-6,0" RenderTransformOrigin="0,0">
             <ProgressBar.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleY="-1"/>
@@ -21,7 +17,6 @@
                 </TransformGroup>
             </ProgressBar.RenderTransform>
         </ProgressBar>
-        <TextBox x:Name="textBox" Height="91.394" Margin="80.866,54.602,-39.472,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
 
     </Grid>
 </Window>

@@ -84,12 +84,15 @@ namespace VCPA
         private void engine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
             string Speech = e.Result.Text;
+
+            Process[] AllProcesses = Process.GetProcesses();
+
             switch (Speech)
             {
                 case "hello":
                     synth.SpeakAsync("Hello, sir");
                     break;
-                case "whattime":
+                case "what time":
                     DateTime now = DateTime.Now;
                     string time = now.GetDateTimeFormats('t')[0];
                     synth.SpeakAsync(time);
@@ -106,37 +109,59 @@ namespace VCPA
                     synth.SpeakAsync("OK");
                     Process.Start("notepad.exe");
                     break;
-                case "open firefox":
+                case "open wordpad":
                     synth.SpeakAsync("OK");
-                    Process.Start("firefox.exe");
+                    Process.Start("wordpad.exe");
+                    break;
+                case "open calculator":
+                    synth.SpeakAsync("OK");
+                    Process.Start("calc.exe");
                     break;
                 case "close browser":
                     synth.SpeakAsync("OK");
-                    Process[] AllProcesses = Process.GetProcesses();
-                    foreach(var process in AllProcesses)
+                    AllProcesses = Process.GetProcesses();
+                    foreach (var process in AllProcesses)
                     {
-                        if(process.MainWindowTitle != "")
+                        if (process.MainWindowTitle != "")
                         {
                             string s = process.ProcessName.ToLower();
-                            if (s == "firefox")
+                            if (s == "firefox" || s == "microsoft edge" || s == "opera" || s == "google chrome") 
                                 process.Kill();
                         }
                     }
                     break;
-                case "whatdate":
-                    string date;
-                    date = "the date is, " + DateTime.Now.ToString("dd MMM", new System.Globalization.CultureInfo("pl-PL"));
-                    synth.SpeakAsync(date);
-                    date = "" + DateTime.Today.ToString("yyyy");
-                    synth.SpeakAsync(date);
+                case "close wordpad":
+                    synth.SpeakAsync("OK");
+                    AllProcesses = Process.GetProcesses();
+                    foreach (var process in AllProcesses)
+                    {
+                        if (process.MainWindowTitle != "")
+                        {
+                            string s = process.ProcessName.ToLower();
+                            if (s == "wordpad")
+                                process.Kill();
+                        }
+                    }
                     break;
-                case "whatday":
+                case "close notepad":
+                    synth.SpeakAsync("OK");
+                    AllProcesses = Process.GetProcesses();
+                    foreach (var process in AllProcesses)
+                    {
+                        if (process.MainWindowTitle != "")
+                        {
+                            string s = process.ProcessName.ToLower();
+                            if (s == "notepad")
+                                process.Kill();
+                        }
+                    }
+                    break;
+                case "what day":
                     string day;
-                    day = "today is" + DateTime.Now.ToString("dddd", new System.Globalization.CultureInfo("pl-PL"));
+                    day = "today is" + DateTime.Now.ToString("dddd MMM", new System.Globalization.CultureInfo("en-US"));
                     synth.SpeakAsync(day);
                     break;
                 case "stop":
-                    if (synth.State == SynthesizerState.Speaking)
                         synth.SpeakAsyncCancelAll();
                     break;
                 case "pause":
