@@ -98,20 +98,24 @@ namespace VCPA
                     synth.SpeakAsync(time);
                     break;
                 case "open google":
-                    synth.SpeakAsync("OK");
+                    synth.SpeakAsync("Sure");
                     Process.Start("https://www.google.com");
                     break;
-                case "open facebook":
+                case "open university":
                     synth.SpeakAsync("OK");
-                    Process.Start("https://www.facebook.com");
+                    Process.Start("https://www.wsiz.rzeszow.pl/pl/Strony/WSIiZ.aspx");
                     break;
                 case "open notepad":
-                    synth.SpeakAsync("OK");
+                    synth.SpeakAsync("Sure");
                     Process.Start("notepad.exe");
                     break;
                 case "open wordpad":
                     synth.SpeakAsync("OK");
                     Process.Start("wordpad.exe");
+                    break;
+                case "open firefox":
+                    synth.SpeakAsync("OK");
+                    Process.Start("firefox.exe");
                     break;
                 case "open calculator":
                     synth.SpeakAsync("OK");
@@ -131,7 +135,7 @@ namespace VCPA
                     }
                     break;
                 case "close wordpad":
-                    synth.SpeakAsync("OK");
+                    synth.SpeakAsync("Doing it");
                     AllProcesses = Process.GetProcesses();
                     foreach (var process in AllProcesses)
                     {
@@ -144,7 +148,7 @@ namespace VCPA
                     }
                     break;
                 case "close notepad":
-                    synth.SpeakAsync("OK");
+                    synth.SpeakAsync("Doing it");
                     AllProcesses = Process.GetProcesses();
                     foreach (var process in AllProcesses)
                     {
