@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VCPA"
         mc:Ignorable="d"
-        Title="MainWindow" Height="193.617" Width="444.326">
-    <Grid Margin="10,0,2,-1">
-        <ProgressBar x:Name="progressBar" Height="32" VerticalAlignment="Bottom" Margin="-14,0,-6,0" RenderTransformOrigin="0,0">
+        Title="Your Personal Assistant" Height="223.676" Width="454.935">
+    <Grid Margin="0,0,0,0">
+        <Image x:Name="image1_png" Margin="0,0,0,0" Source="image1.png" Stretch="Fill"/>
+        <ProgressBar x:Name="progressBar" Height="17" VerticalAlignment="Bottom" Margin="0,0,0,0" RenderTransformOrigin="0,0">
             <ProgressBar.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleY="-1"/>
@@ -17,6 +18,7 @@
                 </TransformGroup>
             </ProgressBar.RenderTransform>
         </ProgressBar>
+        
 
     </Grid>
 </Window>
