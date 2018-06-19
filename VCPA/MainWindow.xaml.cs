@@ -117,10 +117,6 @@ namespace VCPA
                     synth.SpeakAsync("OK");
                     Process.Start("firefox.exe");
                     break;
-                case "open calculator":
-                    synth.SpeakAsync("OK");
-                    Process.Start("calc.exe");
-                    break;
                 case "close browser":
                     synth.SpeakAsync("OK");
                     AllProcesses = Process.GetProcesses();
@@ -165,17 +161,7 @@ namespace VCPA
                     day = "today is" + DateTime.Now.ToString("dddd MMM", new System.Globalization.CultureInfo("en-US"));
                     synth.SpeakAsync(day);
                     break;
-                case "stop":
-                        synth.SpeakAsyncCancelAll();
-                    break;
-                case "pause":
-                    if (synth.State == SynthesizerState.Speaking)
-                        synth.Pause();
-                    break;
-                case "resume":
-                    if (synth.State == SynthesizerState.Paused)
-                        synth.Resume();
-                    break;
+           
             }
         }
 
