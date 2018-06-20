@@ -1,47 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Speech.Recognition;
 using System.Speech.Synthesis;
 using System.IO;
 using System.Diagnostics;
+using System.Windows;
 
-namespace VCPA
+
+namespace VPCATEST
 {
-    /// <summary>
-    /// Dokumentacja do projektu Prosty osobisty asystent
-    /// </summary>
-    public partial class MainWindow : Window
+    [TestClass]
+    public class UnitVPCATest
     {
-    
-       
-       SpeechRecognitionEngine speechRecognitionEngine = new SpeechRecognitionEngine();
+        SpeechRecognitionEngine speechRecognitionEngine = new SpeechRecognitionEngine();
         SpeechSynthesizer synth = new SpeechSynthesizer();
-        
-        /// <summary>
-        /// metoda MainWindow
-        /// </summary>
-        public MainWindow()
+
+
+        public void MainWindow()
         {
-            InitializeComponent();
+            //InitializeComponent();
 
             try
             {
                 speechRecognitionEngine.AudioLevelUpdated += new EventHandler<AudioLevelUpdatedEventArgs>(engine_AudioLevelUpdated);
                 speechRecognitionEngine.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(engine_SpeechRecognized);
+
                 LoadGrammarAndCommands();
+
                 speechRecognitionEngine.SetInputToDefaultAudioDevice();
+
                 speechRecognitionEngine.RecognizeAsync(RecognizeMode.Multiple);
 
                 synth.SpeakCompleted += new EventHandler<SpeakCompletedEventArgs>(synth_SpeakCompleted);
@@ -51,63 +38,44 @@ namespace VCPA
                     synth.SpeakAsyncCancelAll();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Voice recognition failed");
+                //MessageBox.Show(ex.Message, "Voice recognition failed");
             }
 
         }
 
-/// <summary>
-/// Metoda LoadGrammar
-/// </summary>
         private void LoadGrammarAndCommands()
         {
             try
             {
-                
-                Choices Text = new Choices();///Rozkazy z Commands.txt są ładowane do grammar
-
-                string[] Lines = File.ReadAllLines(Environment.CurrentDirectory + "\\Commands.txt");///Zczytywanie rozkazów z Commands.txt
+                Choices Text = new Choices();
+                string[] Lines = File.ReadAllLines(Environment.CurrentDirectory + "\\Commands.txt");
                 Text.Add(Lines);
-                
-                Grammar WordList = new Grammar(new GrammarBuilder(Text));///Pobieranie i ładowanie rozkazów do silnika
+                Grammar WordList = new Grammar(new GrammarBuilder(Text));
                 speechRecognitionEngine.LoadGrammar(WordList);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
             }
         }
 
-
-
-/// <summary>
-/// Metoda Mówienie zakończone
-/// </summary>
-/// <param name="sender"></param>
-/// <param name="e"></param>
         private void synth_SpeakCompleted(object sender, SpeakCompletedEventArgs e)
         {
-            
-            if (synth.State == SynthesizerState.Speaking)///Jeżeli program mówi nie pobiera informacji od użytkownika
+            if (synth.State == SynthesizerState.Speaking)
             {
                 synth.SpeakAsyncCancelAll();
             }
         }
-        /// <summary>
-        /// Lista rozkazów-działań, pobieranie odpowiedzi
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void engine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            
-            string Speech = e.Result.Text;///Zmienna do switch
-                                          
-            Process[] AllProcesses = Process.GetProcesses();///Pobieranie procesu
-                                                            
-            switch (Speech)///switch-case rozkazów-działań
+            string Speech = e.Result.Text;
+
+            Process[] AllProcesses = Process.GetProcesses();
+
+            switch (Speech)
             {
                 case "hello":
                     synth.SpeakAsync("Hello, sir");
@@ -145,7 +113,7 @@ namespace VCPA
                         if (process.MainWindowTitle != "")
                         {
                             string s = process.ProcessName.ToLower();
-                            if (s == "firefox" || s == "microsoft edge" || s == "opera" || s == "google chrome") 
+                            if (s == "firefox" || s == "microsoft edge" || s == "opera" || s == "google chrome")
                                 process.Kill();
                         }
                     }
@@ -181,17 +149,31 @@ namespace VCPA
                     day = "today is" + DateTime.Now.ToString("dddd MMM", new System.Globalization.CultureInfo("en-US"));
                     synth.SpeakAsync(day);
                     break;
-           
+
             }
         }
-/// <summary>
-/// działanie ProgressBar 
-/// </summary>
-/// <param name="sender"></param>
-/// <param name="e"></param>
+
         private void engine_AudioLevelUpdated(object sender, AudioLevelUpdatedEventArgs e)
         {
-            progressBar.Value = e.AudioLevel;
+            //progressBar.Value = e.AudioLevel;
+        }
+
+        [TestMethod]
+        public void speechRecognitionEngine_IsNotNull()
+        {
+            Assert.IsNotNull(speechRecognitionEngine);
+        }
+        [TestMethod]
+        public void synth_IsNotNull()
+        {
+            Assert.IsNotNull(synth);
+        }
+        [TestMethod]
+        public void AreNotSame()
+        {
+            Assert.AreNotSame(synth,speechRecognitionEngine);
         }
     }
+
+
 }

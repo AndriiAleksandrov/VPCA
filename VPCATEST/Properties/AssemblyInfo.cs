@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Управление общими сведениями о сборке осуществляется посредством следующего 
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("VPCAUnitTest")]
+[assembly: AssemblyTitle("VPCATEST")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("VPCAUnitTest")]
+[assembly: AssemblyProduct("VPCATEST")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Если данный проект доступен для модели COM, следующий GUID используется в качестве идентификатора библиотеки типов
-[assembly: Guid("b69e1e5b-2b23-49c4-a108-affa6fd73d67")]
+[assembly: Guid("55e63e9f-5a1f-49c0-81b8-af25ef243647")]
 
 // Сведения о версии сборки состоят из следующих четырех значений:
 //
